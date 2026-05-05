@@ -1099,39 +1099,74 @@
     border-radius: 8px;
     overflow: hidden;
     transition: border-color 0.25s, transform 0.25s;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
   }
   .ep-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
   .ep-thumb {
     aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
-  }
-  .ep-thumb-1 { background: radial-gradient(ellipse at 70% 50%, rgba(184, 149, 56, 0.30), transparent 60%), linear-gradient(135deg, #0e1218 0%, #1a1410 100%); }
-  .ep-thumb-2 { background: radial-gradient(ellipse at 30% 60%, rgba(140, 50, 35, 0.32), transparent 60%), linear-gradient(135deg, #0e1218 0%, #1a1110 100%); }
-  .ep-thumb-3 { background: radial-gradient(ellipse at 50% 40%, rgba(60, 80, 120, 0.28), transparent 60%), linear-gradient(135deg, #0e1218 0%, #14181f 100%); }
-  .ep-thumb-text {
-    position: absolute;
-    bottom: 14px;
-    left: 16px;
-    right: 16px;
-    font-family: var(--serif);
-    font-size: 17px;
-    color: var(--cream);
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: -0.005em;
-  }
-  .ep-thumb-text .accent {
-    color: var(--gold);
+    background: #0B0F14;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    width: 100%;
     display: block;
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-family: var(--sans);
-    margin-bottom: 6px;
-    font-weight: 500;
   }
+  .ep-thumb-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.4s ease, filter 0.3s ease;
+    filter: brightness(0.92);
+  }
+  .ep-thumb:hover .ep-thumb-img {
+    transform: scale(1.04);
+    filter: brightness(1);
+  }
+  .ep-thumb-play {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(217, 185, 91, 0.96);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    transition: transform 0.18s, background 0.18s;
+    box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(217, 185, 91, 0.12);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ep-thumb-play::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 11px solid var(--ink);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    margin-left: 3px;
+  }
+  .ep-thumb:hover .ep-thumb-play {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: var(--gold-bright);
+  }
+  .ep-thumb iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 5;
+  }
+  .ep-thumb.playing .ep-thumb-img,
+  .ep-thumb.playing .ep-thumb-play { display: none; }
   .ep-meta {
     padding: 16px 18px 18px;
   }
@@ -1401,7 +1436,7 @@
     .footer-grid { grid-template-columns: 1fr; }
     .nav-inner { padding: 12px 0; }
     .logo-text { font-size: 13px; }
-    .ep-thumb-text { font-size: 15px; }
+    .ep-thumb-play { width: 50px; height: 50px; }
     .closing-ctas { flex-direction: column; }
     .closing-ctas .btn { width: 100%; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
@@ -1672,36 +1707,39 @@
 
       <!-- Episode grid -->
       <div class="ep-grid">
-        <a href="#" class="ep-card">
-          <div class="ep-thumb ep-thumb-1">
-            <p class="ep-thumb-text"><span class="accent">Frameworks</span>Variance is the bait. You are the line.</p>
-          </div>
+        <article class="ep-card">
+          <button type="button" class="ep-thumb" data-yt="buvogMJieaY" aria-label="Watch: Why your bad month doesn't mean your strategy is wrong">
+            <img class="ep-thumb-img" src="https://i.ytimg.com/vi/buvogMJieaY/maxresdefault.jpg" loading="lazy" decoding="async" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/buvogMJieaY/hqdefault.jpg';" />
+            <span class="ep-thumb-play" aria-hidden="true"></span>
+          </button>
           <div class="ep-meta">
             <p class="ep-cat">Decision traps · Ep 13</p>
             <p class="ep-title">Why your bad month doesn't mean your strategy is wrong</p>
             <p class="ep-dur">14 min · 3 days ago</p>
           </div>
-        </a>
-        <a href="#" class="ep-card">
-          <div class="ep-thumb ep-thumb-2">
-            <p class="ep-thumb-text"><span class="accent">Hand review</span>"I put him on Ace-King."</p>
-          </div>
+        </article>
+        <article class="ep-card">
+          <button type="button" class="ep-thumb" data-yt="VkIWuKHOEZE" aria-label="Watch: Why one-hand reads are how you lose pots you should win">
+            <img class="ep-thumb-img" src="https://i.ytimg.com/vi/VkIWuKHOEZE/maxresdefault.jpg" loading="lazy" decoding="async" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/VkIWuKHOEZE/hqdefault.jpg';" />
+            <span class="ep-thumb-play" aria-hidden="true"></span>
+          </button>
           <div class="ep-meta">
             <p class="ep-cat">Range reading · Ep 12</p>
             <p class="ep-title">Why one-hand reads are how you lose pots you should win</p>
             <p class="ep-dur">17 min · 1 week ago</p>
           </div>
-        </a>
-        <a href="#" class="ep-card">
-          <div class="ep-thumb ep-thumb-3">
-            <p class="ep-thumb-text"><span class="accent">Position</span>Position beats your hand.</p>
-          </div>
+        </article>
+        <article class="ep-card">
+          <button type="button" class="ep-thumb" data-yt="_4b4SHVIkRU" aria-label="Watch: Same cards, same opponent, different seat — different game">
+            <img class="ep-thumb-img" src="https://i.ytimg.com/vi/_4b4SHVIkRU/maxresdefault.jpg" loading="lazy" decoding="async" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/_4b4SHVIkRU/hqdefault.jpg';" />
+            <span class="ep-thumb-play" aria-hidden="true"></span>
+          </button>
           <div class="ep-meta">
             <p class="ep-cat">Fundamentals · Ep 11</p>
             <p class="ep-title">Same cards, same opponent, different seat — different game</p>
             <p class="ep-dur">12 min · 2 weeks ago</p>
           </div>
-        </a>
+        </article>
       </div>
     </div>
   </section>
